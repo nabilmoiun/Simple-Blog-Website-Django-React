@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block container %}
+    <!-- Page Content -->
+    <div class="container" style="min-height: 80vh;">
+
+        <!-- Page Heading/Breadcrumbs -->
+        <h1 class="mt-4 mb-3">Register
+            <small>Form</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active">Register</li>
+        </ol>
+        <!-- Content Row -->
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <form method="post" name="sentMessage" id="contactForm">
+                    {% csrf_token %}
+                    <!-- Iterate through the form to get the fields and its attributes-->
+                    {% for field in form %}
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            {{field.label_tag}}*
+                            {{field}}
+                            {% if field.help_text %}
+                            <p class="help-block lead py-2">{{field.help_text}}</p>
+                            {% endif %}
+                            {% for error in field.errors %}
+                            <p class="lead text-danger">{{error}}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div id="success"></div>
+                    <!-- For success/fail messages -->
+                    <button type="submit" class="btn btn-primary" id="login-btn">Register</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+{% endblock container %}
+
